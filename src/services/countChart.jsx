@@ -4,7 +4,7 @@ import { Badge } from 'antd';
 import { useState } from 'react';
 
 export default function CountChart(){
-  const[count2, setCount]=useState([])
+  const[count2, setCount]=useState("")
   return (
     <div>
         <Badge size='small' count={count2} offset={[4, 4]}>

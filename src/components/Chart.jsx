@@ -21,7 +21,6 @@ export default function Chart({setCount}) {
 
   
   useEffect(() => {
-         let token = localStorage.getItem('token')
          let myHeaders = new Headers();
          myHeaders.append('Content-Type', 'application/json')
          myHeaders.append('Access-Control-Allow-Origin', '*');
