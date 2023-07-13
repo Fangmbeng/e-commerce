@@ -10,7 +10,7 @@ function Error() {
     <div className="content">
       <h1 className='text-white'><strong>Error 404</strong></h1>
       <h6 className='text-white'><em>We currently working on this. Please try another method of payment</em></h6>
-      <Link href="/payments"><button className='btn btn-dark opacity-75'>Try other Mehods</button></Link>
+      <Link to="/payments"><button className='btn btn-dark opacity-75'>Try other Mehods</button></Link>
     </div>
     </div>
   )
