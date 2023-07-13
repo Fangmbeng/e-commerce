@@ -35,7 +35,6 @@ export default function PostCard(props) {
   
       if(response.ok){
         navigate('/rooms')
-        window.location.reload()
         }
     }
 

@@ -73,7 +73,6 @@ export default function DrawerExample(props) {
 
         if (response.ok){
             props.flashMessage(`Your profile has been edited`, 'primary')
-            window.location.reload()
 
         } else {
             props.flashMessage("There was an issue, please try again", 'warning');
@@ -101,7 +100,6 @@ export default function DrawerExample(props) {
       if(response.ok){
         props.logUserOut()
         navigate('/login')
-        window.location.reload()
         }
     }
   return (

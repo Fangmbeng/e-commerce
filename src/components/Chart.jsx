@@ -47,7 +47,6 @@ export default function Chart({setCount}) {
           headers: myHeaders,
       })
       if(response.ok){
-        window.location.reload()
         }
     }
 
@@ -59,7 +58,7 @@ export default function Chart({setCount}) {
       let price = event.price
 
     // Get the token from localStorage
-    let token = localStorage.getItem('token');
+    //let token = localStorage.getItem('token');
 
     let myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/json')
@@ -74,7 +73,6 @@ export default function Chart({setCount}) {
     })
 
     if(response.ok){
-      window.location.reload()
       }
     }
 

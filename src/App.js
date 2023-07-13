@@ -33,7 +33,6 @@ function App() {
           setValue(data.user.email)
           localStorage.setItem('email', data.user.email)
           navigate('/')
-          window.location.reload()
           flashMessage('You have successfully logged in', 'success');
       })
 
@@ -74,7 +73,7 @@ function App() {
         flashMessage("You have logged out", "primary");
       }else{
         localStorage.removeItem('email');
-        window.location.reload()
+        flashMessage("You have logged out", "primary");
       }
     }
 
