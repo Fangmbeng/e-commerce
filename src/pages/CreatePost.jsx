@@ -46,7 +46,6 @@ export default function CreatePost(props) {
             let data = await response.json();
             props.flashMessage(`${data.brand} has been created`, 'primary');
             navigate('/rooms')
-            window.location.reload()
         } else {
             props.flashMessage("There was an issue, please try again", 'warning');
         }

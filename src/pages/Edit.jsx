@@ -37,7 +37,6 @@ export default function Edit(props) {
             //let data = await response.json();
             props.flashMessage(`Your article has been edited`, 'primary')
             navigate('/rooms')
-            window.location.reload()
 
         } else {
             props.flashMessage("There was an issue, please try again", 'warning');
