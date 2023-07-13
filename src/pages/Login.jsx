@@ -32,7 +32,7 @@ export default function Login(props) {
             localStorage.setItem('tokenExp', expiration);
             props.flashMessage('You have successfully logged in', 'success');
             props.logUserIn();
-            navigate('/*/rooms');
+            navigate('/rooms');
         } else {
             props.flashMessage('Your username and/or password are incorrect', 'danger');
             localStorage.removeItem('username')
