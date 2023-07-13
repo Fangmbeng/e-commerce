@@ -8,7 +8,7 @@ export default function CreatePost(props) {
     useEffect(() => {
         if (!(props.loggedIn || props.value)){
             props.flashMessage('You must be logged in to view this page', 'danger');
-            navigate('/login');
+            navigate('/*/login');
         }
     })
 

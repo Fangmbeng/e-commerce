@@ -36,7 +36,7 @@ export default function Edit(props) {
         if (response.ok){
             //let data = await response.json();
             props.flashMessage(`Your article has been edited`, 'primary')
-            navigate('/rooms')
+            navigate('/*/rooms')
             window.location.reload()
 
         } else {
