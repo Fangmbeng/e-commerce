@@ -18,7 +18,10 @@ function Acount(props) {
         let email = event.target.email.value;
         let password = event.target.password.value;
         let confir_password = event.target.confirmPassword.value;
-        if(password===confir_password){
+        if(password!==confir_password){
+          let message = "password does not match, please try again"
+            return <Warning message={message}/>
+        }else{
 
 
         let token = localStorage.getItem('token');
@@ -85,9 +88,9 @@ function Acount(props) {
           <div className="form-group">
             <h1 className='text-white'><strong>Modify Account</strong></h1>
               <input type="text" className="form-control my-3" placeholder='Enter Username' name='username' />
-              <input type="password" className="form-control my-3" placeholder='Enter email' name='email' />
-              <input type="text" className="form-control my-3" placeholder='Enter password' name='password' />
-              <input type="text" className="form-control my-3" placeholder='Re-Enter password' name='confirmPassword' />
+              <input type="text" className="form-control my-3" placeholder='Enter email' name='email' />
+              <input type="password" className="form-control my-3" placeholder='Enter password' name='password' />
+              <input type="password" className="form-control my-3" placeholder='Re-Enter password' name='confirmPassword' />
               <input type="submit" value="save" className="btn btn-success m-auto" />
               <Link to='/' className='btn btn-info mr-auto ml-auto'>
                   Cancel
