@@ -7,10 +7,12 @@ export default function Rooms(props) {
       <div className="main">
       <div className='overlay'></div>
       <video src={video3} autoPlay loop muted/>
-      <div className="content">
+      <div >
+      <div className="content1">
         <>
         <Articles value={props.value} loggedIn={props.loggedIn}/>
         </>
+    </div>
     </div>
     </div>
   )

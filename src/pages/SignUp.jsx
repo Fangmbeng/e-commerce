@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Navigate } from 'react-router-dom';
 import video2 from '../shopping video/video2.mp4'
+import ToastSuccess from '../components/ToastSuccess';
+import Warning from '../components/Toastify';
 
 
 export default class SignUp extends Component {
@@ -17,7 +19,8 @@ export default class SignUp extends Component {
         let password = event.target.password.value;
         let confirmPass = event.target.confirmPass.value;
         if (password !== confirmPass){
-            //this.props.flashMessage('Passwords do not match', 'danger');
+            let message = 'Passwords do not match'
+            return <Warning message={message}/>
         } else {
 
             // Set up the request
@@ -39,13 +42,15 @@ export default class SignUp extends Component {
                 .then(res => res.json())
                 .then(data => {
                     if (data.error){
-                        //this.props.flashMessage(data.error, "danger")
+                        let message = '😞Error, Please try again'
+                        return <Warning message={message}/>
                     } else {
                         console.log(data)
-                        //this.props.flashMessage(`${data.username} has been created`, 'success')
+                        let message='😎Your Account has been created, You can now login'
                         this.setState({
                             redirect: true
                         })
+                        return <ToastSuccess message={message}/>
                     }
                 })
         }

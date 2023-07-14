@@ -22,7 +22,7 @@ export default function Navbar (props) {
                 <Link className='nav-link text-info' to='/create'>Post Article</Link>
                 <CountChart/>
                 <Link className='nav-link text-danger-emphasis' to='/' onClick={props.logUserOut}>Log Out</Link>
-                <DrawerExample flashMessage={props.flashMessage} username={username} loggedIn={props.loggedIn} value={props.value}/>
+                <DrawerExample username={username} loggedIn={props.loggedIn} value={props.value}/>
                 </>
             ) : props.value ? (
                 <>
@@ -33,7 +33,7 @@ export default function Navbar (props) {
                 <Link className='nav-link text-info' to='/create'>Post Article</Link>
                 <CountChart/>
                 <Link className='nav-link text-dange-emphasis' to='/' onClick={props.logUserOut}>Log Out</Link>
-                <DrawerGoogle deleteGoggle={props.deleteGoggle} logUserOut={props.logUserOut} flashMessage={props.flashMessage} loggedIn={props.loggedIn} value={props.value}/>
+                <DrawerGoogle deleteGoggle={props.deleteGoggle} logUserOut={props.logUserOut} loggedIn={props.loggedIn} value={props.value}/>
                 </>
             ) : (
                 <>

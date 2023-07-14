@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Link } from 'react-router-dom';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Rooms from './pages/Rooms';
@@ -6,7 +6,6 @@ import SignUp from './pages/SignUp';
 import { useEffect, useState } from 'react';
 import { signInWithPopup, deleteUser } from 'firebase/auth';
 import { auth, Providers } from './config/firebase';
-import AlertMessage from './components/AlerteMessage';
 import Navbar from './components/Navbar';
 import { useNavigate } from 'react-router-dom';
 import { ChakraProvider } from '@chakra-ui/react'
@@ -15,15 +14,28 @@ import CreatePost from './pages/CreatePost';
 import Edit from './pages/Edit';
 import Payments from './pages/Payment';
 import Error from './pages/Error';
+import Acount from './pages/Acount';
+import ToastInfo from './components/ToastInfo';
+import Warning from './components/Toastify';
+import ToastSuccess from './components/ToastSuccess';
+//import { io } from 'socket.io-client';
 
 
 function App() {
   const [value, setValue] = useState('')
-
-  
-  const [message, setMessage] = useState(null);
-  const [category, setCategory] = useState(null);
   const navigate = useNavigate();
+ /* const [socket, setSocket]= useState(null)
+  
+  const user = localStorage.getItem('user')
+
+  useEffect(()=>{
+    const socket = io("http://localhost:5000");
+    console.log(socket)
+  }, [])
+
+  useEffect(()=>{
+    socket.emit('newUser', user);
+  }, [socket, user])*/
 
   const now = new Date();
   const [loggedIn, setLoggedIn] = useState((localStorage.getItem('token') && new Date(localStorage.getItem('tokenExp')) > now));
@@ -33,29 +45,28 @@ function App() {
           setValue(data.user.email)
           localStorage.setItem('email', data.user.email)
           navigate('/')
-          flashMessage('You have successfully logged in', 'success');
+          let message ='You have successfully logged in'
+          return <ToastSuccess message={message}/>
       })
 
   }
     
-  const user = auth.currentUser
-  localStorage.setItem('user_auth', user)
+  /*const user = auth.currentUser
+  localStorage.setItem('user_auth', user)*/
 
     const deleteGoggle=()=>{
       const user = auth.currentUser;
       deleteUser(user).then(() => {
         navigate('/')
         logUserOut()
-        flashMessage('Account has been deleted', 'success')
+        let message ='Account has been deleted'
+        return <ToastInfo message={message}/>
         }).catch((error) => {
-          flashMessage('Error please try later', 'success')
+          let message = 'Error please try later'
+          return <Warning message={message}/>
         });
     }
 
-    function flashMessage(message, category){
-      setMessage(message);
-      setCategory(category);
-    }
 
 
     function logUserIn(){
@@ -70,10 +81,12 @@ function App() {
         localStorage.removeItem('username')
         localStorage.removeItem('id')
         window.location.reload()
-        flashMessage("You have logged out", "primary");
+        let message = "You have logged out"
+        return <ToastInfo message={message}/>
       }else{
         localStorage.removeItem('email');
-        flashMessage("You have logged out", "primary");
+        let message = "You have logged out"
+        return <ToastInfo message={message}/>
       }
     }
 
@@ -85,22 +98,20 @@ function App() {
     
     <>
     <ChakraProvider>
-    <Navbar deleteGoggle={deleteGoggle} flashMessage={flashMessage} handleClick={handleClick} value={value} loggedIn={loggedIn} logUserOut={logUserOut} />
-    <div>
-      {message ? <AlertMessage message={message} category={category} flashMessage={flashMessage} /> : null}
-    </div>
-    <h2 className='text-center'> Blessing's Mart</h2>
+    <Navbar deleteGoggle={deleteGoggle} handleClick={handleClick} value={value} loggedIn={loggedIn} logUserOut={logUserOut} />
+    <Link to="/"><h2 className='text-center'> Blessing's Mart</h2></Link>
     <h6 className='text-center'><em>Shop the latest and Best Deals on the Market anyday anytime</em></h6>
       <Routes>
         <Route path="/" element={<Home value={value} loggedIn={loggedIn} />} />
-        <Route path="/login" element={<Login flashMessage={flashMessage} logUserIn={logUserIn} handleClick={handleClick}/>} />
-        <Route path="/sign_up" element={<SignUp flashMessage={flashMessage} />} />
-        <Route path="/rooms" element={<Rooms value={value} loggedIn={loggedIn} flashMessage={flashMessage} />} />
-        <Route path="/edit" element={<Edit value={value} loggedIn={loggedIn} flashMessage={flashMessage} />} />
-        <Route path="/create" element={<CreatePost value={value} loggedIn={loggedIn} flashMessage={flashMessage} />} />
-        <Route path="/search" element={<Search value={value} loggedIn={loggedIn} flashMessage={flashMessage} />} />
-        <Route path="/payments" element={<Payments value={value} loggedIn={loggedIn} flashMessage={flashMessage} />} />
-        <Route path="/error" element={<Error value={value} loggedIn={loggedIn} flashMessage={flashMessage} />} />
+        <Route path="/login" element={<Login logUserIn={logUserIn} handleClick={handleClick}/>} />
+        <Route path="/sign_up" element={<SignUp />} />
+        <Route path="/rooms" element={<Rooms value={value} loggedIn={loggedIn} />} />
+        <Route path="/edit" element={<Edit value={value} loggedIn={loggedIn} />} />
+        <Route path="/create" element={<CreatePost value={value} loggedIn={loggedIn} />} />
+        <Route path="/search" element={<Search value={value} loggedIn={loggedIn} />} />
+        <Route path="/payments" element={<Payments value={value} loggedIn={loggedIn} />} />
+        <Route path="/error" element={<Error value={value} loggedIn={loggedIn} />} />
+        <Route path="/account" element={<Acount value={value} loggedIn={loggedIn} />} />
       </Routes>
       </ChakraProvider>
       </>

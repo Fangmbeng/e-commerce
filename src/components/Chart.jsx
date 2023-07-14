@@ -12,6 +12,7 @@ import {
 } from '@chakra-ui/react'
 import { AiFillShopping } from "react-icons/ai"
 import { Link } from 'react-router-dom'
+import ToastInfo from '../components/ToastInfo';
 
 
 export default function Chart({setCount}) {
@@ -32,6 +33,7 @@ export default function Chart({setCount}) {
                .then(data => {
                   setItems(data)
                   let count1=setItems.length
+                  console.log(data)
                   setCount(count1)})
 
      },[])
@@ -73,6 +75,9 @@ export default function Chart({setCount}) {
     })
 
     if(response.ok){
+      window.location.reload()
+      let message = 'item has been deleted'
+        return <ToastInfo message={message}/>
       }
     }
 

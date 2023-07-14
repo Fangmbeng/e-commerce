@@ -39,7 +39,7 @@ export default function DrawerGoogle(props) {
               <Avatar name={email} src={avatar} />
             </WrapItem>
           </Wrap>
-            <Link to='/picture'>Edit avatar here</Link>
+            <Link className='text-info' to='/account'>Edit Account here</Link>
             <p>Welcome</p>
             <h4 className='text center'>{email}</h4>
           <DrawerBody>

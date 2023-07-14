@@ -1,6 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import video4 from '../shopping video/video4.mp4'
+import ToastSuccess from '../components/ToastSuccess';
+import Warning from '../components/Toastify';
 
 export default function Login(props) {
 
@@ -30,12 +32,14 @@ export default function Login(props) {
             // Store the value in local storage on the browser
             localStorage.setItem('token', token);
             localStorage.setItem('tokenExp', expiration);
-            props.flashMessage('You have successfully logged in', 'success');
+            let message='😎 You have successfully logged in'
             props.logUserIn();
             navigate('/rooms');
+            return <ToastSuccess message={message}/>
         } else {
-            props.flashMessage('Your username and/or password are incorrect', 'danger');
+            let message ='😞 Your username and/or password are incorrect'
             localStorage.removeItem('username')
+            return <Warning message={message}/>
         }
     }
 

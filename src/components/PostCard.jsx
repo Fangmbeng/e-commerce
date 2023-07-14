@@ -1,10 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
+import ToastInfo from '../components/ToastInfo';
+import Warning from '../components/Toastify';
+import DeleteItem from './DeleteItem';
 
 export default function PostCard(props) {
-  //let username=localStorage.getItem('username')
-  //let user_auth =localStorage.getItem('user_auth')
   const navigate = useNavigate();
 
   async function handleDelete(event){
@@ -13,10 +14,6 @@ export default function PostCard(props) {
       let name=event.name
       let size = event.size
       let price = event.price
-      let image = event.image
-
-      console.log(id)
-      console.log(brand)
   
       // Get the token from localStorage
       let token = localStorage.getItem('token');
@@ -26,7 +23,7 @@ export default function PostCard(props) {
       myHeaders.append('Authorization', `Bearer ${token}`);
       myHeaders.append('Access-Control-Allow-Origin', '*')
       // Make the fetch request
-      let requestBody = JSON.stringify({brand, name, size, price, image, id})
+      let requestBody = JSON.stringify({brand, name, size, price, id})
       let response = await fetch(`https://shopping-site-6amv.onrender.com/api/post/delete/${id}`, {
           method: 'POST',
           headers: myHeaders,
@@ -34,7 +31,12 @@ export default function PostCard(props) {
       })
   
       if(response.ok){
-        navigate('/rooms')
+        window.location.reload()
+        let message = 'Your item has been deleted'
+          return <ToastInfo message={message}/>
+        }else{
+          let message = "Try Again"
+          return <Warning message={message}/>
         }
     }
 
@@ -58,7 +60,8 @@ export default function PostCard(props) {
       })
   
       if(response.ok){
-        window.location.reload()
+        let message=`${brand} ${name} has been added to your cart`
+        return <ToastInfo message={message}/>
         }
     }
 
@@ -80,7 +83,7 @@ export default function PostCard(props) {
           {props.loggedIn || props.value?(
                 <>
                 <button className='btn btn-success mr-3' onClick={handleEdit}>Edit Post</button>
-                <button className='btn btn-danger mr-3' onClick={()=>handleDelete(props.post)} >Delete</button>
+                <DeleteItem handleDelete={handleDelete} post={props.post}/>
                 </>
             ) : (
                 <>
