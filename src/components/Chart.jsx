@@ -12,10 +12,9 @@ import {
 } from '@chakra-ui/react'
 import { AiFillShopping } from "react-icons/ai"
 import { Link } from 'react-router-dom'
-import ToastInfo from '../components/ToastInfo';
 
 
-export default function Chart({setCount}) {
+export default function Chart({setCount, flashMessage}) {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = React.useRef()
   const[items, setItems]=useState([])
@@ -77,7 +76,7 @@ export default function Chart({setCount}) {
     if(response.ok){
       window.location.reload()
       let message = 'item has been deleted'
-        return <ToastInfo message={message}/>
+      flashMessage(message, 'warning')
       }
     }
 

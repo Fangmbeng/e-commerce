@@ -5,12 +5,12 @@ import video3 from '../shopping video/video3.mp4'
 export default function Rooms(props) {
   return (
       <div className="main">
-      <div className='overlay'></div>
       <video src={video3} autoPlay loop muted/>
       <div >
       <div className="content1">
         <>
-        <Articles value={props.value} loggedIn={props.loggedIn}/>
+        <h1 className='text-center'> <em>Check our latest products</em></h1>
+        <Articles flashMessage={props.flashMessage} value={props.value} loggedIn={props.loggedIn}/>
         </>
     </div>
     </div>

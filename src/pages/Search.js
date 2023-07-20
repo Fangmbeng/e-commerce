@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import SearchBar from '../components/SearchBar'
 import SearchBarList from '../components/SearchBarList'
 import video5 from '../shopping video/video5.mp4'
+import PostCard from '../components/PostCard'
 
 export default function Search() {
   const[results, setResults]=useState([])
@@ -12,6 +13,7 @@ export default function Search() {
     <div className="content">
       <SearchBar setResults={setResults}/>
       <SearchBarList results={results}/>
+      <PostCard post={results}/>
     </div>
     </div>
   )

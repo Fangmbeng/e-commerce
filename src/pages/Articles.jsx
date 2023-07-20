@@ -22,7 +22,7 @@ function Articles(props) {
      
   return (
     <div>
-       {posts.map((post, idx) => <PostCard value={props.value} loggedIn={props.loggedIn} post={post} key={idx}/>)}
+       {posts.map((post, idx) => <PostCard flashMessage={props.flashMessage} value={props.value} loggedIn={props.loggedIn} post={post} key={idx}/>)}
     </div>
   )
   }

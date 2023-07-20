@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import video7 from '../shopping video/video7.mp4'
-import ToastInfo from '../components/ToastInfo';
-import Warning from '../components/Toastify';
 
 export default function CreatePost(props) {
 
@@ -11,7 +9,7 @@ export default function CreatePost(props) {
         if (!(props.loggedIn || props.value)){
             let message = 'You must be logged in to view this page'
             navigate('/login');
-            return <Warning message={message}/>
+            props.flashMessage(message, 'warning')
         }
     })
 
@@ -49,10 +47,10 @@ export default function CreatePost(props) {
             let data = await response.json();
             let message =`👍${data.brand} has been created`
             navigate('/rooms')
-            return <ToastInfo message={message}/>
+            props.flashMessage(message, 'info')
         } else {
             let message = "👎There was an issue, please try again"
-            return <Warning message={message}/>
+            props.flashMessage(message, 'warning')
         }
     }
 

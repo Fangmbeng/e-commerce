@@ -34,7 +34,8 @@ export default function DrawerExample() {
             .then(res => res.json())
             .then(data =>{setUser(data[0])
                   localStorage.setItem('user', data[0])
-                  localStorage.setItem('username', data[0].username)})
+                  localStorage.setItem('username', data[0].username)
+                  localStorage.setItem('id', data[0].id)})
         },[])
 
   return (

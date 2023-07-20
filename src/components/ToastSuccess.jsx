@@ -1,36 +1,15 @@
 import React from 'react'
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
-function ToastSuccess({message}) {
-    const notify = () =>toast.success({message}, {
-    position: "top-center",
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    theme: "colored",
-    });
-    
+
+function Toast({message, category, flashMessage}) {
   return (
     <div>
-     <div onClick={notify}>Notify!</div>
-     <ToastContainer
-        position="top-center"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="colored"
-        />
+        <div className={`alert alert-${category} alert-dismissible fade show`} role="alert" >
+            <strong>{message}</strong>
+            <button className='btn-close' onClick={() => flashMessage(null, null)}></button>
+        </div>
     </div>
   )
 }
 
-export default ToastSuccess
+export default Toast

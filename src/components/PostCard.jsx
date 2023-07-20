@@ -1,8 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
-import ToastInfo from '../components/ToastInfo';
-import Warning from '../components/Toastify';
 import DeleteItem from './DeleteItem';
 
 export default function PostCard(props) {
@@ -33,10 +31,10 @@ export default function PostCard(props) {
       if(response.ok){
         window.location.reload()
         let message = 'Your item has been deleted'
-          return <ToastInfo message={message}/>
+        props.flashMessage(message, 'info')
         }else{
           let message = "Try Again"
-          return <Warning message={message}/>
+          props.flashMessage(message, 'warning')
         }
     }
 
@@ -61,7 +59,7 @@ export default function PostCard(props) {
   
       if(response.ok){
         let message=`${brand} ${name} has been added to your cart`
-        return <ToastInfo message={message}/>
+        props.flashMessage(message, 'info')
         }
     }
 

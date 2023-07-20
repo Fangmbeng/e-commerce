@@ -2,8 +2,7 @@ import React from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import AlertDialogExample2 from '../components/DeleteCustomer2'
 import BackgroundSlider from '../components/Background_slider1'
-import ToastInfo from '../components/ToastInfo';
-import Warning from '../components/Toastify';
+
 
 
 function Acount(props) {
@@ -14,18 +13,19 @@ function Acount(props) {
         console.log(event);
 
         // Get the data from the form
-        let new_username = event.target.username.value;
+        let username = event.target.username.value;
         let email = event.target.email.value;
         let password = event.target.password.value;
         let confir_password = event.target.confirmPassword.value;
         if(password!==confir_password){
           let message = "password does not match, please try again"
-            return <Warning message={message}/>
+          props.flashMessage(message, 'warning')
         }else{
 
 
         let token = localStorage.getItem('token');
         let id = localStorage.getItem('id')
+        console.log(id)
 
         // Set up the request headers
         let myHeaders = new Headers();
@@ -35,7 +35,7 @@ function Acount(props) {
 
         console.log(typeof id)
         
-        let requestBody = JSON.stringify({new_username, email, password})
+        let requestBody = JSON.stringify({username, email, password})
 
         // Make the fetch request
         let response = await fetch(`https://shopping-site-6amv.onrender.com/api/user/edit/${id}`, {
@@ -46,10 +46,11 @@ function Acount(props) {
 
         if (response.ok){
             let message =`Your profile has been edited`
-            return <ToastInfo message={message}/>
+            props.flashMessage(message, 'info')
+            window.location.reload()
         } else {
             let message = "There was an issue, please try again"
-            return <Warning message={message}/>
+            props.flashMessage(message, 'warning')
         }
     }
   }
@@ -65,6 +66,8 @@ function Acount(props) {
       myHeaders.append('Content-Type', 'application/json')
       myHeaders.append('Authorization', `Bearer ${token}`);
       myHeaders.append('Access-Control-Allow-Origin', '*')
+
+
       // Make the fetch request
       let response = await fetch(`https://shopping-site-6amv.onrender.com/api/user/delete/${id}`, {
           method: 'POST',
@@ -75,7 +78,7 @@ function Acount(props) {
         props.logUserOut()
         navigate('/login')
         let message = 'Account has been deleted'
-        return <ToastInfo message={message}/>
+        props.flashMessage(message, 'info')
         }
     }
   return (

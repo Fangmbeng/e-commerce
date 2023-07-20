@@ -1,8 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import video4 from '../shopping video/video4.mp4'
-import ToastSuccess from '../components/ToastSuccess';
-import Warning from '../components/Toastify';
+
+
 
 export default function Login(props) {
 
@@ -14,6 +14,7 @@ export default function Login(props) {
         let username = event.target.username.value;
         let password = event.target.password.value;
         let stringToEncode = `${username}:${password}`
+
 
         let myHeaders = new Headers();
         myHeaders.append('Authorization', `Basic ${btoa(stringToEncode)}`);
@@ -32,17 +33,16 @@ export default function Login(props) {
             // Store the value in local storage on the browser
             localStorage.setItem('token', token);
             localStorage.setItem('tokenExp', expiration);
-            let message='😎 You have successfully logged in'
             props.logUserIn();
-            navigate('/rooms');
-            return <ToastSuccess message={message}/>
+            navigate('/rooms')
+            let message ='😎 You have successfully logged in'
+            props.flashMessage(message, 'success')
         } else {
             let message ='😞 Your username and/or password are incorrect'
             localStorage.removeItem('username')
-            return <Warning message={message}/>
+            props.flashMessage(message, 'warning')
         }
     }
-
 
     return (
         <>

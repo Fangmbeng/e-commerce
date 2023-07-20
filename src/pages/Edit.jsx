@@ -1,8 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import video6 from '../shopping video/video6.mp4'
-import ToastInfo from '../components/ToastInfo';
-import Warning from '../components/Toastify';
 
 export default function Edit(props) {
     const navigate = useNavigate();
@@ -39,11 +37,11 @@ export default function Edit(props) {
             //let data = await response.json();
             let message = `👌Your article has been edited`
             navigate('/rooms')
-            return <ToastInfo message={message}/>
+            props.flashMessage(message, 'info')
 
         } else {
             let message = "👎There was an issue, please try again"
-            return <Warning message={message}/>
+            props.flashMessage(message, 'warning')
 
         }
     }

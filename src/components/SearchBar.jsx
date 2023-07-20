@@ -18,9 +18,10 @@ export default function SearchBar({setResults}) {
       .then((response)=>response.json())
       .then((json)=>{
         const results = json.filter((post)=>{
-          return value && post && post.id && post.name && post.name.toLowerCase().includes(value)
+          return value && post && post.id && post.name && (post.name.toLowerCase().includes(value) || post.name.toUpperCase().includes(value))
         });
         setResults(results)
+        console.log(results)
       })
   }
 
